@@ -21,6 +21,11 @@ export default class TimeStore extends StoreBase {
     state.parsedFocusTimes = parseFocusTimes(state.focusTimes);
     this[DATA] = Im.fromJS(state);
   }
+  dehydrate() {
+    let state = this[DATA].toJS();
+    state.now = state.now.getTime();
+    return state;
+  }
   get handlers() {
     return [{
       action: SetFocustimes.symbol,
@@ -49,11 +54,6 @@ export default class TimeStore extends StoreBase {
         .set('focus', isFocusTime(now, this[DATA].get('parsedFocusTimes')));
     });
     this.emit('change');
-  }
-  dehydrate() {
-    let state = this[DATA].toJS();
-    state.now = state.now.getTime();
-    return state;
   }
   static get state() {
     return this.getInstance()[DATA];
