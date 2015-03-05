@@ -1,13 +1,17 @@
 import React from 'react';
+import TimeStore from '../stores/time-store';
+import {merge as m} from 'meepworks/styles';
+import styles from './clock-styles';
 
 export const ClockFace = React.createClass({
+  shouldComponentUpdate() {
+    return false;
+  },
   render() {
     return <svg
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0
-      }}
+      style={
+        styles.clockContainer
+      }
       height="100%"
       width="100%"
       viewBox="0 0 1000 1000" >
@@ -30,114 +34,87 @@ export const ClockFace = React.createClass({
 
 export const Clock = React.createClass({
   render() {
-    return <div></div>;
-  }
-});
-
-/**
-
-var Clock = React.createClass({
-  getInitialState: function () {
-    return {
-      time: new Date()
-    };
-  },
-  componentDidMount: function () {
-    raf(this.animate);
-  },
-  animate: function () {
-    if(this.isMounted()) {
-      this.setState({
-        time: new Date()
-      });
-      raf(this.animate);
+    let now = this.props.now;
+    if(!now) {
+      now = new Date();
     }
-  },
-  render: function () {
-    var ms = this.state.time.getMilliseconds();
-    var seconds = this.state.time.getSeconds();
-    var minutes = this.state.time.getMinutes();
-    var hours = this.state.time.getHours()%12;
+    let ms = now.getMilliseconds();
+    let s = now.getSeconds();
+    let m = now.getMinutes();
+    let h = now.getHours();
 
-    var className = ['mp-clock'];
-    var center = {
-      x: 500,
-      y: 500
-    };
-
-    return <svg className={className.join(' ')} height="100%" width="100%" viewBox="0 0 1000 1000">
+    return <svg
+      style={styles.clock}
+      height="100%"
+      width="100%"
+      viewBox="0 0 1000 1000"
+      >
       <Hand
-        center={center}
         length={320}
-        angle={(ms + seconds*1000)/60000*360}
+        angle={(ms + s*1000)/60000*360}
       />
       <StyleHand
-        center={center}
         length={200}
-        color={'red'}
+        color="red"
         width={10}
-        angle={(hours*3600000 + minutes*60000 + seconds*1000 + ms)/43200000*360}
+        angle={(h*3600000 + m*60000 + s*1000 + ms)/43200000*360}
       />
       <StyleHand
-        center={center}
         length={350}
         width={5}
-        angle={(minutes*60000 + seconds*1000 + ms)/3600000*360}
+        angle={(m*60000 + s*1000 + ms)/3600000*360}
       />
-      <circle cx={center.x} cy={center.y} r="20" fill="black" />
     </svg>;
   }
 });
-var Hand = React.createClass({
-  getDefaultProps: function () {
+const Hand = React.createClass({
+  getDefaultProps() {
     return {
-      center: {
-        x: 0,
-        y: 0
-      },
       color: 'black',
       width: 1,
       length: 0,
       angle: 0
     };
   },
-  render: function () {
-    var transforms = ['translate(500, 500)','rotate(' + this.props.angle + ')'];
-    return <line className="mp-clock-hand"
-      x1={0}
-      y1={0}
-      x2={0}
+  shouldComponentUpdate(nextProps) {
+    return !(nextProps.angle === this.props.angle &&
+             nextProps.color === this.props.color &&
+             nextProps.width === this.props.width &&
+             nextProps.length === this.props.length);
+  },
+  render() {
+    return <line
+      x1="0"
+      y1="0"
+      x2="0"
       y2={-this.props.length}
       stroke={this.props.color}
       strokeWidth={this.props.width}
-      transform={transforms.join(' ')}
+      transform={`translate(500, 500) rotate(${this.props.angle})`}
     />;
   }
+
 });
 
-var StyleHand = React.createClass({
-  getDefaultProps: function () {
+const StyleHand = React.createClass({
+  getDefaultProps() {
     return {
-      center: {
-        x: 0,
-        y: 0
-      },
       color: 'black',
       width: 1,
       length: 0,
       angle: 0
     };
   },
-  render: function () {
-    var transforms = ['translate(500, 500)', 'rotate(' + this.props.angle + ')'];
-    var points = [
-      [0,0].join(','),
-      [-this.props.width/2, -this.props.length*0.3].join(','),
-      [0, -this.props.length].join(','),
-      [this.props.width/2, -this.props.length*0.3].join(',')
-    ].join(' ');
-
-    return <polygon points={points} fill={this.props.color} transform={transforms.join(' ')}/>;
+  shouldComponentUpdate(nextProps) {
+    return !(nextProps.angle === this.props.angle &&
+             nextProps.color === this.props.color &&
+             nextProps.width === this.props.width &&
+             nextProps.length === this.props.length);
+  },
+  render() {
+    return <polygon
+      points={`0,0 ${-this.props.width/2},${-this.props.length*0.3} 0,${-this.props.length} ${this.props.width/2},${-this.props.length*0.3}`}
+      fill={this.props.color}
+      transform={`translate(500, 500) rotate(${this.props.angle})`}/>;
   }
-  });
-*/
+});
