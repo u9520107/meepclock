@@ -14,7 +14,7 @@ const log = debug('server-log');
 import requireFilter from 'meepworks/require-filter';
 requireFilter.filter('.css!');
 
-import AdminApp from './app/app';
+import MeepClock from './app/app';
 import AppDriver from 'meepworks/server-app-driver';
 
 
@@ -29,12 +29,12 @@ server.use(mount('/jspm_packages', serve(path.resolve(__dirname, '../jspm_packag
 server.use(function * (next) {
   let t = new Date();
   yield next;
-  log(this.req.url, t, `${ (new Date().getTime() - t.getTime()) } ms`);
+  log(this.req.url, `${ (new Date().getTime() - t.getTime()) } ms`);
 });
 
 
 
-server.use(mount('/', new AppDriver(AdminApp, {
+server.use(mount('/', new AppDriver(MeepClock, {
   appPath: 'app/app',
   jspm: {
     path: 'jspm_packages',

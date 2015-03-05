@@ -59,11 +59,11 @@ const App = React.createClass({
     let focus = this.state.time.get('focus');
     return <div className="app-contaier">
       {
-        <div className="debug-info">
-          Now: {this.state.time.get('now').toString()}<br />
-          Focus: {focus.toString()}<br /><br />
-          Focus times: <pre><code>{JSON.stringify(this.state.time.get('focusTimes'), null, 2)}</code></pre>
-        </div>
+        //<div className="debug-info">
+        //  Now: {this.state.time.get('now').toString()}<br />
+        //  Focus: {focus.toString()}<br /><br />
+        //  Focus times: <pre><code>{JSON.stringify(this.state.time.get('focusTimes'), null, 2)}</code></pre>
+        //</div>
         }
         <div
           className="app-content"
@@ -152,7 +152,7 @@ export default {
     payload: [
       '9:30~10:30',
       '11:00~12:00',
-      '15:51~18:15'
+      '16:52~16:53'
     ]
   }],
   routes: {

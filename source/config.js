@@ -21,5 +21,6 @@ function setUrl(conf) {
 
 export const debug = [
   'bind-url',
-  'bind-log'
+  'bind-log',
+  'tmpl-log'
 ];
