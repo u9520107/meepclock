@@ -1,0 +1,1 @@
+"use strict";var _interopRequire=require("babel-runtime/helpers/interop-require")["default"],StyleMap=_interopRequire(require("meepworks/styles"));module.exports=new StyleMap({clock:{position:"absolute",top:0,left:0}});
