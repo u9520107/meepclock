@@ -27,6 +27,7 @@ jspm_packages
 
 build/
 bundle/
+scripts/
 
 # Users Environment Variables
 .lock-wscript

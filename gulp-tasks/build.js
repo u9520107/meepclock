@@ -4,6 +4,7 @@ import path from 'path';
 import plumber from 'gulp-plumber';
 import * as gb from 'greasebox';
 import * as config from './config';
+import uglify from 'gulp-uglify';
 
 import debug from 'debug';
 
@@ -24,6 +25,17 @@ gulp.task('build:js', ['clean'], (cb) => {
     .pipe(gb.loadMap())
     .pipe(gb.babelTransform(config.babelOptions))
     .pipe(gb.writeMap())
+    .pipe(gulp.dest(config.paths.build))
+    .on('end', cb);
+});
+
+gulp.task('build:dist:js', ['clean'], (cb) => {
+  gulp.src(jsFiles)
+    .pipe(plumber({
+      errorHanlder: cb
+    }))
+    .pipe(gb.babelTransform(config.babelOptions))
+    .pipe(uglify())
     .pipe(gulp.dest(config.paths.build))
     .on('end', cb);
 });
