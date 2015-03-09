@@ -25,5 +25,7 @@ coverage
 node_modules
 jspm_packages
 
+bundle/
+
 # Users Environment Variables
 .lock-wscript
