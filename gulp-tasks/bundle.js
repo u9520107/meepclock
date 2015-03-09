@@ -92,23 +92,10 @@ gulp.task('bundle:dist', ['clean:bundle'], (cb) => {
           }
         });
 
-        let fname = path.resolve(config.paths.bundle, `${bundle}.js`);
+        let fname = path.relative(process.cwd(), path.resolve(config.paths.bundle, `${bundle}.js`));
 
         let cmd = `jspm bundle ${exp} ${fname} --minify --inject --skip-source-maps`;
         bundleCommands.push(cmd);
-        if(/^win/i.test(process.platform)) {
-          console.log(yield exec(cmd));
-        } else {
-          yield new Promise((resolve, reject) => {
-
-            cp.spawn('jspm', ['bundle', exp, fname, '--minify', '--inject', '--skip-source-maps'], {
-              stdio: 'inherit'
-            }).on('err', reject)
-            .on('exit', ()=> {
-              resolve();
-            });
-          });
-        }
       }
       //generate bundle script
       if(!yield cofs.exists(path.resolve(__dirname, '../scripts'))) {
@@ -118,8 +105,8 @@ gulp.task('bundle:dist', ['clean:bundle'], (cb) => {
       ${bundleCommands.join('\n')}
       `;
 
-      yield cofs.writeFile(path.resolve(__dirname, '../scripts/bundle.js'), bundleScript);
-      yield cofs.chmod(path.resolve(__dirname, '../scripts/bundle.js'), '775');
+      yield cofs.writeFile(path.resolve(__dirname, '../scripts/bundle.sh'), bundleScript);
+      yield cofs.chmod(path.resolve(__dirname, '../scripts/bundle.sh'), '775');
 
     }
   }).then(cb)
