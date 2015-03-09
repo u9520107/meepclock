@@ -24,3 +24,5 @@ export const debug = [
   'bind-log',
   'tmpl-log'
 ];
+
+export const version = '20150309';

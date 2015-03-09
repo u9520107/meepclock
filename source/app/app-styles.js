@@ -1,5 +1,5 @@
 import StyleMap from 'meepworks/styles';
-
+import focusImgC from './assets/images/focus-c.png!asset';
 
 function transition (props) {
   return {
@@ -61,7 +61,7 @@ export default new StyleMap({
     base,
     defaultTransition,
     display: 'block',
-    backgroundImage: `url('/build/app/assets/images/focus-c.png')`,
+    backgroundImage: `url('${focusImgC}')`,
     backgroundPosition: '50% 50%',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'

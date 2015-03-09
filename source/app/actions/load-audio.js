@@ -1,4 +1,6 @@
 import ActionBase from 'meepworks/action-base';
+import mp3Start from '../assets/mp3/start.mp3!asset';
+import mp3End from '../assets/mp3/focus-end.mp3!asset';
 
 export const LOAD_AUDIO = Symbol();
 
@@ -13,8 +15,8 @@ export default class LoadAudio extends ActionBase {
     let ctx = new AudioContext();
 
     let res = yield [
-      '/build/app/assets/mp3/start.mp3',
-      '/build/app/assets/mp3/focus-end.mp3'
+      mp3Start,
+      mp3End
     ].map(f=> new Promise((resolve, reject) => {
       let req = new XMLHttpRequest();
       req.open('get', f);

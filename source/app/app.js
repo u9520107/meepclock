@@ -12,6 +12,10 @@ import InitAudio from './actions/init-audio';
 import LoadAudio from './actions/load-audio';
 import PlayAudio from './actions/play-audio';
 
+import focusImgA from './assets/images/focus-a.png!asset';
+import focusImgD from './assets/images/focus-d.png!asset';
+import coopImg from './assets/images/cooperation.png!asset';
+import coopLogoImg from './assets/images/cooperation-logo.png!asset';
 
 const App = React.createClass({
   getInitialState() {
@@ -84,7 +88,7 @@ const App = React.createClass({
               )}></div>
             <img
               key="focus-egg"
-              src="/build/app/assets/images/focus-a.png"
+              src={focusImgA}
               style={m(
                 styles.focusEgg,
                 !focus && styles.focusEggTransform
@@ -92,7 +96,7 @@ const App = React.createClass({
             />
             <img
               key="focus-logo"
-              src="/build/app/assets/images/focus-d.png"
+              src={focusImgD}
               style={m(
                 styles.focusLogo,
                 !focus && styles.focusLogoTransform
@@ -108,7 +112,7 @@ const App = React.createClass({
             )}>
             <img
               key="cooperation"
-              src="/build/app/assets/images/cooperation.png"
+              src={coopImg}
               style={m(
                 styles.cooperation,
                 focus && styles.cooperationTransform
@@ -116,7 +120,7 @@ const App = React.createClass({
             />
             <img
               key="cooperation-logo"
-              src="/build/app/assets/images/cooperation-logo.png"
+              src={coopLogoImg}
               style={m(
                 styles.cooperationLogo,
                 focus && styles.cooperationLogoTransform
