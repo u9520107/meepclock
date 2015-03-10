@@ -26,7 +26,6 @@ node_modules
 jspm_packages
 
 bundle/
-build/
 
 
 # Users Environment Variables
