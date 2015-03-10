@@ -11,6 +11,7 @@ import AudioStore from './stores/audio-store';
 import InitAudio from './actions/init-audio';
 import LoadAudio from './actions/load-audio';
 import PlayAudio from './actions/play-audio';
+import ClientInit from './actions/client-init';
 
 import focusImgA from './assets/images/focus-a.png!asset';
 import focusImgD from './assets/images/focus-d.png!asset';
@@ -23,7 +24,12 @@ const App = React.createClass({
   },
   componentDidMount() {
     TimeStore.getInstance().on('change', this.handleChange);
-    requestAnimationFrame(this.triggerUpdateTime);
+
+    new ClientInit().exec()
+    .then(() => {
+      requestAnimationFrame(this.triggerUpdateTime);
+    });
+
     new InitAudio()
       .exec()
       .then(() => {

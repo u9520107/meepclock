@@ -3,6 +3,7 @@ import Im from 'immutable';
 
 import SetFocustimes from '../actions/set-focustimes';
 import UpdateTime from '../actions/update-time';
+import ClientInit from '../actions/client-init';
 
 const DATA = Symbol();
 const INTERNAL = Symbol();
@@ -13,6 +14,7 @@ export default class TimeStore extends StoreBase {
       now: new Date(),
       parsedFocusTimes: [],
       focusTimes: [],
+      delay: 0,
       focus: false
     });
   }
@@ -33,6 +35,9 @@ export default class TimeStore extends StoreBase {
     }, {
       action: UpdateTime.symbol,
       handler: this.handleUpdateTime
+    }, {
+      action: ClientInit.symbol,
+      handler: this.handleClientInit
     }];
   }
   handleSetFocus(f = []) {
@@ -49,11 +54,26 @@ export default class TimeStore extends StoreBase {
   }
   handleUpdateTime() {
     this[DATA] = this[DATA].withMutations(m => {
-      let now = new Date();
+      let now = new Date().getTime();
+      let delay = this[DATA].get('delay');
+      if(delay > 0) {
+        delay -= 5;
+        if(delay > 0) {
+          now -= delay;
+        }
+      }
+      now = new Date(now);
+
       m.set('now', now)
+        .set('delay', delay)
         .set('focus', isFocusTime(now, this[DATA].get('parsedFocusTimes')));
     });
     this.emit('change');
+  }
+  handleClientInit() {
+    let now = new Date();
+    let delta = now.getTime() - this[DATA].get('now').getTime();
+    this[DATA] = this[DATA].set('delay', delta);
   }
   static get state() {
     return this.getInstance()[DATA];
