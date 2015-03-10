@@ -3,6 +3,7 @@ import router from 'koa-router';
 import favicon from 'koa-favicon';
 import mount from 'koa-mount';
 import serve from 'koa-static-cache';
+import gzip from 'koa-gzip';
 import path from 'path';
 import * as config from './config';
 
@@ -28,6 +29,7 @@ import AppDriver from 'meepworks/server-app-driver';
 const server = koa();
 const port = process.env.PORT || 13352;
 
+server.use(gzip());
 
 server.use(favicon());
 server.use(mount('/build', serve(path.resolve(__dirname, '../build/'), {
