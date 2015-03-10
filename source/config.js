@@ -25,4 +25,4 @@ export const debug = [
   'tmpl-log'
 ];
 
-export const version = '20150309';
+export const version = '20150310';
