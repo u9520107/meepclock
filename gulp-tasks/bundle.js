@@ -98,7 +98,7 @@ gulp.task('bundle:dist', ['clean:bundle'], (cb) => {
         bundleCommands.push(cmd);
       }
       //generate bundle script
-      if(!yield cofs.exists(path.resolve(__dirname, '../scripts'))) {
+      if(!(yield cofs.exists(path.resolve(__dirname, '../scripts')))) {
         yield cofs.mkdir(path.resolve(__dirname, '../scripts'));
       }
       let bundleScript = dedent`#!/usr/bin/env bash

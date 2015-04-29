@@ -10,6 +10,7 @@ const INTERNAL = Symbol();
 
 export default class TimeStore extends StoreBase {
   constructor() {
+    super();
     this[DATA] = Im.fromJS({
       now: new Date(),
       parsedFocusTimes: [],
@@ -30,13 +31,13 @@ export default class TimeStore extends StoreBase {
   }
   get handlers() {
     return [{
-      action: SetFocustimes.symbol,
+      action: SetFocustimes,
       handler: this.handleSetFocus
     }, {
-      action: UpdateTime.symbol,
+      action: UpdateTime,
       handler: this.handleUpdateTime
     }, {
-      action: ClientInit.symbol,
+      action: ClientInit,
       handler: this.handleClientInit
     }];
   }

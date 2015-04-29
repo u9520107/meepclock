@@ -7,6 +7,7 @@ const DATA = Symbol();
 
 export default class AudioStore extends StoreBase {
   constructor() {
+    super();
     this.rehydrate();
   }
   rehydrate() {
@@ -35,13 +36,13 @@ export default class AudioStore extends StoreBase {
   }
   get handlers() {
     return [{
-      action: InitAudio.symbol,
+      action: InitAudio,
       handler: this.handleInitAudio
     }, {
-      action: LoadAudio.symbol,
+      action: LoadAudio,
       handler: this.handleLoadAudio
     }, {
-      action: PlayAudio.symbol,
+      action: PlayAudio,
       handler: this.handlePlayAudio
     }];
   }

@@ -2,15 +2,7 @@ import ActionBase from 'meepworks/action-base';
 import mp3Start from '../assets/mp3/start.mp3!asset';
 import mp3End from '../assets/mp3/focus-end.mp3!asset';
 
-export const LOAD_AUDIO = Symbol();
-
 export default class LoadAudio extends ActionBase {
-  static get symbol() {
-    return LOAD_AUDIO;
-  }
-  get symbol() {
-    return LOAD_AUDIO;
-  }
   *action () {
     let ctx = new AudioContext();
 

@@ -4,21 +4,21 @@ import focusImgC from './assets/images/focus-c.png!asset';
 function transition (props) {
   return {
     transition: props,
-    webkitTransition: props
+    WebkitTransition: props
   };
 }
 
 function transform (props) {
   return {
     transform: props,
-    webkitTransform: props
+    WebkitTransform: props
   };
 }
 
 function transformOrigin(props) {
   return {
     transformOrigin: props,
-    webkitTransformOrigin: props
+    WebkitTransformOrigin: props
   };
 }
 
