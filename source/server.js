@@ -12,15 +12,7 @@ import debug from 'debug';
 debug.enable('server-log');
 const log = debug('server-log');
 
-import RequireFilter from 'meepworks/require-filter';
-let requireFilter = new RequireFilter({
-  fileRoot: __dirname,
-  urlRoot: '/build',
-  version: config.version
-});
-requireFilter.filter('.css!');
-requireFilter.filter('.mp3!');
-requireFilter.filter('.*!asset');
+import './filter';
 
 import MeepClock from './app/app';
 import AppDriver from 'meepworks/server-app-driver';
@@ -32,6 +24,7 @@ const port = process.env.PORT || 13352;
 server.use(gzip());
 
 server.use(favicon());
+
 server.use(mount('/build', serve(path.resolve(__dirname, '../build/'), {
   maxAge: 5*60*1000,
   dynamic: true

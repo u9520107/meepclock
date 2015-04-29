@@ -7,6 +7,8 @@ import plumber from 'gulp-plumber';
 import * as config from './config';
 import debug from 'debug';
 import { spawnServer, killServer} from './server';
+import babel from 'gulp-babel';
+import sourcemaps from 'gulp-sourcemaps';
 
 debug.enable('watch');
 const log = debug('watch');
@@ -58,9 +60,9 @@ gulp.task('watch', ['server'], () => {
                     resolve();
                   }
                 }))
-                .pipe(gb.loadMap())
-                .pipe(gb.babelTransform(config.babelOptions))
-                .pipe(gb.writeMap())
+                .pipe(sourcemaps.init())
+                .pipe(babel(config.babelOptions))
+                .pipe(sourcemaps.write('.'))
                 .pipe(gulp.dest(config.paths.build))
                 .on('end', resolve);
               });
