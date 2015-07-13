@@ -18,6 +18,9 @@ export default class TimeStore extends StoreBase {
       delay: 0,
       focus: false
     });
+    this.bindHandler(SetFocustimes, this.handleSetFocus);
+    this.bindHandler(UpdateTime, this.handleUpdateTime);
+    this.bindHandler(ClientInit, this.handleClientInit);
   }
   rehydrate(state) {
     state.now = new Date(state.now);
@@ -29,18 +32,6 @@ export default class TimeStore extends StoreBase {
     state.now = state.now.getTime();
     return state;
   }
-  get handlers() {
-    return [{
-      action: SetFocustimes,
-      handler: this.handleSetFocus
-    }, {
-      action: UpdateTime,
-      handler: this.handleUpdateTime
-    }, {
-      action: ClientInit,
-      handler: this.handleClientInit
-    }];
-  }
   handleSetFocus(f = []) {
     if(!Array.isArray(f)) {
       f = [f];
@@ -51,7 +42,7 @@ export default class TimeStore extends StoreBase {
       .set('parsedFocusTimes', parsed)
       .set('focus', isFocusTime(this[DATA].get('now'), parsed));
     });
-    this.emit('change');
+    this.changed();
   }
   handleUpdateTime() {
     this[DATA] = this[DATA].withMutations(m => {
@@ -69,7 +60,7 @@ export default class TimeStore extends StoreBase {
         .set('delay', delay)
         .set('focus', isFocusTime(now, this[DATA].get('parsedFocusTimes')));
     });
-    this.emit('change');
+    this.changed();
   }
   handleClientInit() {
     let now = new Date();

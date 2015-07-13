@@ -19,10 +19,5 @@ function setUrl(conf) {
 }
 
 
-export const debug = [
-  'bind-url',
-  'bind-log',
-  'tmpl-log'
-];
 
-export const version = '20150310-1';
+export const version = '20150310-2';

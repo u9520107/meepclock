@@ -5,7 +5,7 @@ import co from 'co';
 import cofs from 'greasebox/cofs';
 import exec from 'co-exec';
 import * as config from './config';
-import dedent from 'meepworks/dedent';
+import dedent from 'greasebox/dedent';
 
 
 gulp.task('bundle', ['clean:bundle'], (cb) => {

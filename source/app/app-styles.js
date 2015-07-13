@@ -36,7 +36,7 @@ export default new StyleMap({
     base,
     top: 0,
     left: 0,
-    opacity: 0.9
+    opacity: 1
   },
   clockContainer: {
     base,
@@ -55,7 +55,7 @@ export default new StyleMap({
     backgroundColor: '#BDBE08'
   },
   normalColor: {
-    backgroundColor: '#6ACCBD'
+    backgroundColor: '#75CDBE'
   },
   focusBackground: {
     base,

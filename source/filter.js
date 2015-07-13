@@ -2,8 +2,8 @@ import * as config from './config';
 import RequireFilter from 'meepworks/require-filter';
 
 let requireFilter = new RequireFilter({
-  fileRoot: __dirname,
-  urlRoot: '/build',
+  root: __dirname,
+  baseURL: '/build',
   version: config.version
 });
 

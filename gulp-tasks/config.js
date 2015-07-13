@@ -8,20 +8,28 @@ export const paths =  {
 };
 
 export const babelOptions = {
-    optional: ['runtime']
+  modules: 'common',
+  optional: ['runtime'],
+  stage: 0
 };
 
 
 export const bundles = {
-  'base': [
-    'react',
-    'co',
-    'meepworks/client-app-driver',
-    'meepworks/uuid',
-    'meepworks/tmpl',
-    'meepworks/styles',
-    'greasebox'
-  ]
+  //'base': [
+  //  'react',
+  //  'co',
+  //  'meepworks/client-app-driver',
+  //  'meepworks/tmpl',
+  //  'meepworks/styles',
+  //  'greasebox'
+  //]
 };
 
-gulp.task('config', ()=>{});
+gulp.task('config', () => {
+  console.log(JSON.stringify({
+    paths,
+    babelOptions,
+    bundles
+  }, null, 2));
+
+});

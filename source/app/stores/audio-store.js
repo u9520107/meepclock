@@ -9,6 +9,9 @@ export default class AudioStore extends StoreBase {
   constructor() {
     super();
     this.rehydrate();
+    this.bindHandler(InitAudio, this.handleInitAudio);
+    this.bindHandler(LoadAudio, this.handleLoadAudio);
+    this.bindHandler(PlayAudio, this.handlePlayAudio);
   }
   rehydrate() {
     this[DATA] = {
@@ -33,17 +36,5 @@ export default class AudioStore extends StoreBase {
       src.connect(this[DATA].ctx.destination);
       src.start(0);
     }
-  }
-  get handlers() {
-    return [{
-      action: InitAudio,
-      handler: this.handleInitAudio
-    }, {
-      action: LoadAudio,
-      handler: this.handleLoadAudio
-    }, {
-      action: PlayAudio,
-      handler: this.handlePlayAudio
-    }];
   }
 }
